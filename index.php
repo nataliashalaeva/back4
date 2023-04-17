@@ -29,6 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['fio'] = !empty($_COOKIE['fio_error']);
   $errors['year'] = !empty($_COOKIE['year_error']);
   $errors['email'] = !empty($_COOKIE['email_error']);
+  $errors['gender'] = !empty($_COOKIE['gender_error']);
+  $errors['superpower'] = !empty($_COOKIE['superpower_error']);
+  $errors['limbs'] = !empty($_COOKIE['limbs_error']);
+  $errors['text'] = !empty($_COOKIE['text_error']);
+  $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
@@ -50,13 +55,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните email.</div>';
   }
+  if ($errors['gender']) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('gender_error', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="error">Заполните gender.</div>';
+  }
+    if ($errors['superpower']) {
+      // Удаляем куку, указывая время устаревания в прошлом.
+      setcookie('superpower_error', '', 100000);
+      // Выводим сообщение.
+      $messages[] = '<div class="error">Заполните superpower.</div>';
+    }
+      if ($errors['limds']) {
+        // Удаляем куку, указывая время устаревания в прошлом.
+        setcookie('limds_error', '', 100000);
+        // Выводим сообщение.
+        $messages[] = '<div class="error">Заполните limds.</div>';
   // TODO: тут выдать сообщения об ошибках в других полях.
+}
+if ($errors['text']) {
+  // Удаляем куку, указывая время устаревания в прошлом.
+  setcookie('text_error', '', 100000);
+  // Выводим сообщение.
+  $messages[] = '<div class="error">Заполните text.</div>';
+}
+if ($errors['checkbox']) {
+  // Удаляем куку, указывая время устаревания в прошлом.
+  setcookie('checkbox_error', '', 100000);
+  // Выводим сообщение.
+  $messages[] = '<div class="error">Заполните checkbox.</div>';
+}
+
 
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
   $values['fio'] = empty($_COOKIE['fio_value']) ? '' : $_COOKIE['fio_value'];
   $values['year'] = empty($_COOKIE['year_value']) ? '' : $_COOKIE['year_value'];
   $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
+  $values['gender'] = empty($_COOKIE['gender_value']) ? '' : $_COOKIE['gender_value'];
+  $values['superpower'] = empty($_COOKIE['superpower_value']) ? '' : $_COOKIE['superpower_value'];
+  $values['limbs'] = empty($_COOKIE['limbs_value']) ? '' : $_COOKIE['limbs_value'];
+  $values['text'] = empty($_COOKIE['text_value']) ? '' : $_COOKIE['text_value'];
+  $values['checkbox'] = empty($_COOKIE['checkbox_value']) ? '' : $_COOKIE['checkbox_value'];
   // TODO: аналогично все поля.
 
   // Включаем содержимое файла form.php.
@@ -95,6 +136,51 @@ else {
     // Сохраняем ранее введенное в форму значение на месяц.
     setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60);
   }
+  if (empty($_POST['gender'])) {
+    // Выдаем куку на день с флажком об ошибке в поле fio.
+    setcookie('gender_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+  else {
+    // Сохраняем ранее введенное в форму значение на месяц.
+    setcookie('gender_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
+  }
+  if (empty($_POST['superpower'])) {
+    // Выдаем куку на день с флажком об ошибке в поле fio.
+    setcookie('superpower_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+  else {
+    // Сохраняем ранее введенное в форму значение на месяц.
+    setcookie('superpower_value', $_POST['superpower'], time() + 30 * 24 * 60 * 60);
+  }
+  if (empty($_POST['limbs'])) {
+    // Выдаем куку на день с флажком об ошибке в поле fio.
+    setcookie('limbs_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+  else {
+    // Сохраняем ранее введенное в форму значение на месяц.
+    setcookie('limbs_value', $_POST['limbs'], time() + 30 * 24 * 60 * 60);
+  }
+  if (empty($_POST['text'])) {
+    // Выдаем куку на день с флажком об ошибке в поле fio.
+    setcookie('text_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+  else {
+    // Сохраняем ранее введенное в форму значение на месяц.
+    setcookie('text_value', $_POST['text'], time() + 30 * 24 * 60 * 60);
+  }
+  if (empty($_POST['checkbox'])) {
+    // Выдаем куку на день с флажком об ошибке в поле fio.
+    setcookie('checkbox_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+  else {
+    // Сохраняем ранее введенное в форму значение на месяц.
+    setcookie('checkbox_value', $_POST['checkbox'], time() + 30 * 24 * 60 * 60);
+  }
 
 // *************
 // TODO: тут необходимо проверить правильность заполнения всех остальных полей.
@@ -111,6 +197,11 @@ else {
     setcookie('fio_error', '', 100000);
     setcookie('year_error', '', 100000);
     setcookie('email_error', '', 100000);
+    setcookie('gender_error', '', 100000);
+    setcookie('superpower_error', '', 100000);
+    setcookie('limbs_error', '', 100000);
+    setcookie('text_error', '', 100000);
+    setcookie('checkbox_error', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
