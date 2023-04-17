@@ -23,17 +23,11 @@ if (!empty($messages)) {
 // и задавая начальные значения элементов ранее сохраненными.
 ?>
 
-    <form action="" method="POST">
+ <form action="" method="POST">
       <p> Форма </p>
 <p> Напишите имя, год и email. <br>
 <input name="fio" <?php if ($errors['fio']) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>" >
-<select name="year" <?php if ($errors['year']) {print 'class="error"';} ?> value="<?php print $values['year']; ?>" >
-<?php
-for ($i = 1922; $i <= 2022; $i++) {
-printf('<option value="%d">%d год</option>', $i, $i);
-}
-?>
-</select>
+<input name="year" <?php if ($errors['year']) {print 'class="error"';} ?> value="<?php print $values['year']; ?>" >
 <input name="email" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>" >
 </p>
 <p>Выберите пол: <br>
@@ -63,13 +57,13 @@ printf('<option value="%d">%d год</option>', $i, $i);
 <INPUT name="limbs" type="radio" value="4">
 4
 </p>
-<INPUT type="text" name="TextBox" size="100" maxlength="100" <?php if ($errors['text']) {print 'class="error"';} ?> value="<?php print $values['text']; ?>" >
+<INPUT type="text" name="text" size="100" maxlength="100" <?php ($errors['text']) {print 'class="error"';} ?> value="<?php print $values['text']; ?>">
 <p>
 C контрактом ознакомлен.
-<input type="checkbox" name="formWheelchair" value="Yes" />
+<input type="checkbox" name="formWheelchair" value="Yes" <?php ($errors['checkbox']) {print 'class="error"';} ?> value="<?php print $values['checkbox']; ?>">
 </p>
 <p>
-<input type="submit" value="ok" />
+<input type="submit" value="ok">
 
 </p>
     </form>
