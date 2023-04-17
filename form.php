@@ -34,10 +34,10 @@ printf('<option value="%d">%d год</option>', $i, $i);
 }
 ?>
 </select>
-<input name="email" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>" >>
+<input name="email" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>" >
 </p>
 <p>Выберите пол: <br>
-<INPUT name="gender" type="radio" value="m" selected = "selected">
+<INPUT name="gender" type="radio" value="m" selected = "selected" >
 М
 <INPUT name="gender" type="radio" value="j">
 Ж
@@ -63,7 +63,7 @@ printf('<option value="%d">%d год</option>', $i, $i);
 <INPUT name="limbs" type="radio" value="4">
 4
 </p>
-<INPUT type="text" name="TextBox" size="100" maxlength="100">
+<INPUT type="text" name="TextBox" size="100" maxlength="100" <?php if ($errors['text']) {print 'class="error"';} ?> value="<?php print $values['text']; ?>" >>
 <p>
 C контрактом ознакомлен.
 <input type="checkbox" name="formWheelchair" value="Yes" />
