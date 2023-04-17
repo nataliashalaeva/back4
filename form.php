@@ -63,7 +63,7 @@ printf('<option value="%d">%d год</option>', $i, $i);
 <INPUT name="limbs" type="radio" value="4">
 4
 </p>
-<INPUT type="text" name="TextBox" size="100" maxlength="100" <?php if ($errors['text']) {print 'class="error"';} ?> value="<?php print $values['text']; ?>" >>
+<INPUT type="text" name="TextBox" size="100" maxlength="100" <?php if ($errors['text']) {print 'class="error"';} ?> value="<?php print $values['text']; ?>" >
 <p>
 C контрактом ознакомлен.
 <input type="checkbox" name="formWheelchair" value="Yes" />
