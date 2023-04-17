@@ -60,7 +60,7 @@ if (!empty($messages)) {
 <INPUT type="text" name="text" size="100" maxlength="100" >
 <p>
 C контрактом ознакомлен.
-<input type="checkbox" name="formWheelchair" value="Yes" <?php ($errors['checkbox']) {print 'class="error"';} ?> value="<?php print $values['checkbox']; ?>">
+<input type="checkbox" name="formWheelchair" value="Yes">
 </p>
 <p>
 <input type="submit" value="ok">
