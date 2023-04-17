@@ -57,7 +57,7 @@ if (!empty($messages)) {
 <INPUT name="limbs" type="radio" value="4">
 4
 </p>
-<INPUT type="text" name="text" size="100" maxlength="100" <?php ($errors['text']) {print 'class="error"';} ?> value="<?php print $values['text']; ?>">
+<INPUT type="text" name="text" size="100" maxlength="100" >
 <p>
 C контрактом ознакомлен.
 <input type="checkbox" name="formWheelchair" value="Yes" <?php ($errors['checkbox']) {print 'class="error"';} ?> value="<?php print $values['checkbox']; ?>">
