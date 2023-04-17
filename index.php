@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // Складываем признак ошибок в массив.
   $errors = array();
   $errors['fio'] = !empty($_COOKIE['fio_error']);
+  $errors['year'] = !empty($_COOKIE['year_error']);
+  $errors['email'] = !empty($_COOKIE['email_error']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
@@ -36,11 +38,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages[] = '<div class="error">Заполните имя.</div>';
   }
+  if ($errors['year']) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('year_error', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="error">Заполните год.</div>';
+  }
+  if ($errors['email']) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('email_error', '', 100000);
+    // Выводим сообщение.
+    $messages[] = '<div class="error">Заполните email.</div>';
+  }
   // TODO: тут выдать сообщения об ошибках в других полях.
 
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
   $values['fio'] = empty($_COOKIE['fio_value']) ? '' : $_COOKIE['fio_value'];
+  $values['year'] = empty($_COOKIE['year_value']) ? '' : $_COOKIE['year_value'];
+  $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
   // TODO: аналогично все поля.
 
   // Включаем содержимое файла form.php.
@@ -61,6 +77,24 @@ else {
     // Сохраняем ранее введенное в форму значение на месяц.
     setcookie('fio_value', $_POST['fio'], time() + 30 * 24 * 60 * 60);
   }
+  if (empty($_POST['year'])) {
+    // Выдаем куку на день с флажком об ошибке в поле fio.
+    setcookie('year_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+  else {
+    // Сохраняем ранее введенное в форму значение на месяц.
+    setcookie('year_value', $_POST['year'], time() + 30 * 24 * 60 * 60);
+  }
+  if (empty($_POST['email'])) {
+    // Выдаем куку на день с флажком об ошибке в поле fio.
+    setcookie('email_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  }
+  else {
+    // Сохраняем ранее введенное в форму значение на месяц.
+    setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60);
+  }
 
 // *************
 // TODO: тут необходимо проверить правильность заполнения всех остальных полей.
@@ -75,6 +109,8 @@ else {
   else {
     // Удаляем Cookies с признаками ошибок.
     setcookie('fio_error', '', 100000);
+    setcookie('year_error', '', 100000);
+    setcookie('email_error', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
