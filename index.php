@@ -65,15 +65,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       // Удаляем куку, указывая время устаревания в прошлом.
       setcookie('superpower_error', '', 100000);
       // Выводим сообщение.
-      $messages[] = '<div class="error">Заполните superpower.</div>';
-    }
-      if ($errors['limds']) {
-        // Удаляем куку, указывая время устаревания в прошлом.
-        setcookie('limds_error', '', 100000);
+      $messages[] = '<div class="error">Заполните superpower.</div>';}
+  
+    if ($errors['limbs']) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+       setcookie('limbs_error', '', 100000);
         // Выводим сообщение.
-        $messages[] = '<div class="error">Заполните limds.</div>';
+       $messages[] = '<div class="error">Заполните limbs.</div>';
+    }
   // TODO: тут выдать сообщения об ошибках в других полях.
-}
+
 if ($errors['text']) {
   // Удаляем куку, указывая время устаревания в прошлом.
   setcookie('text_error', '', 100000);
