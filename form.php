@@ -78,8 +78,7 @@ if (!empty($messages)) {
 </p>
 <INPUT type="text" <?php if ($errors['text']) {print 'class="error"';} ?> value="<?php print $values['text']; ?>" name="text" size="100" maxlength="100">
 <div class="checkbox <?php if ($errors['check']) {print 'error';} ?> ">
-                <input type="checkbox" name="check" <?php if($values['check']==TRUE){print 'checked';} ?>/> С контактом ознакомлен(а)
-            </div>
+                <input type="checkbox" name="check" <?php if($values['check']==TRUE){print 'checked';} ?>/> С контактом ознакомлен(а)</div>
 <p>
   <input type="submit" value="ok" />
   
