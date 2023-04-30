@@ -4,7 +4,7 @@
  * с использованием Cookies, а также заполнение формы по умолчанию ранее
  * введенными значениями.
  */
-
+echo "<link rel='stylesheet' href='style.css'>";
 // Отправляем браузеру правильную кодировку,
 // файл index.php должен быть в кодировке UTF-8 без BOM.
 header('Content-Type: text/html; charset=UTF-8');
@@ -120,7 +120,6 @@ else {
     setcookie('fio_value', $_POST['fio'], time() + 30 * 24 * 60 * 60);
   }
   if (empty($_POST['year'])) {
-    // Выдаем куку на день с флажком об ошибке в поле fio.
     setcookie('year_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -129,7 +128,6 @@ else {
     setcookie('year_value', $_POST['year'], time() + 30 * 24 * 60 * 60);
   }
   if (empty($_POST['email'])) {
-    // Выдаем куку на день с флажком об ошибке в поле fio.
     setcookie('email_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -138,7 +136,6 @@ else {
     setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60);
   }
   if (empty($_POST['gender'])) {
-    // Выдаем куку на день с флажком об ошибке в поле fio.
     setcookie('gender_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -147,7 +144,6 @@ else {
     setcookie('gender_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
   }
   if (empty($_POST['superpower'])) {
-    // Выдаем куку на день с флажком об ошибке в поле fio.
     setcookie('superpower_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -156,7 +152,6 @@ else {
     setcookie('superpower_value', $_POST['superpower'], time() + 30 * 24 * 60 * 60);
   }
   if (empty($_POST['limbs'])) {
-    // Выдаем куку на день с флажком об ошибке в поле fio.
     setcookie('limbs_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -165,7 +160,6 @@ else {
     setcookie('limbs_value', $_POST['limbs'], time() + 30 * 24 * 60 * 60);
   }
   if (empty($_POST['text'])) {
-    // Выдаем куку на день с флажком об ошибке в поле fio.
     setcookie('text_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -174,13 +168,14 @@ else {
     setcookie('text_value', $_POST['text'], time() + 30 * 24 * 60 * 60);
   }
   if (empty($_POST['checkbox'])) {
-    // Выдаем куку на день с флажком об ошибке в поле fio.
     setcookie('checkbox_error', '1', time() + 24 * 60 * 60);
+    setcookie('check_value', '', 100000);
     $errors = TRUE;
   }
   else {
     // Сохраняем ранее введенное в форму значение на месяц.
     setcookie('checkbox_value', $_POST['checkbox'], time() + 30 * 24 * 60 * 60);
+      setcookie('check_error','',100000);
   }
 
 // *************
@@ -207,7 +202,59 @@ else {
   }
 
   // Сохранение в БД.
-  // ...
+  $user = 'u52809';
+  $pass = '3437720';
+  $db = new PDO('mysql:host=localhost;dbname=u52809', $user, $pass, [PDO::ATTR_PERSISTENT => true]);
+  
+  try{
+      $stmt = $db->prepare("REPLACE INTO abilities (id,name_of_ability) VALUES (10, 'Бессмертие'), (20, 'Прохождение сквозь стены'), (30, 'Левитация')");
+      $stmt-> execute();
+  }
+  catch (PDOException $e) {
+      print('Error : ' . $e->getMessage());
+      exit();
+  }
+  // Подготовленный запрос. Не именованные метки.
+  try {
+      $stmt = $db->prepare("INSERT INTO form SET name = ?, year = ?, email = ?, pol = ?, limbs = ?, bio = ?");
+      $stmt -> execute([$_POST['fio'], $_POST['year'], $_POST['email'],$_POST['gender'], $_POST['limbs'], $_POST['text']]);
+  }
+  catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+  }
+  
+  $id = $db->lastInsertId();
+  
+  try{
+      $stmt = $db->prepare("REPLACE INTO Super (id_s,name) VALUES (10, 'God'), (20, 'fly'), (30, 'idclip'), (40, 'fireball')");
+      $stmt-> execute();
+  }
+  catch (PDOException $e) {
+      print('Error : ' . $e->getMessage());
+      exit();
+  }
+  
+  //print_r($_POST);
+  //print_r($id);
+  //exit();
+  try {
+      $stmt = $db->prepare("INSERT INTO Sform SET id_per = ?, id_sup = ?");
+      foreach ($_POST['superpower'] as $ability) {
+          if ($ability=='t')
+          {$stmt -> execute([$id, 10]);}
+          else if ($ability=='b')
+          {$stmt -> execute([$id, 20]);}
+          else if ($ability=='c')
+          {$stmt -> execute([$id, 30]);}
+          else if ($ability=='p')
+          {$stmt -> execute([$id, 30]);}
+      }
+  }
+  catch(PDOException $e) {
+      print('Error : ' . $e->getMessage());
+      exit();
+  }
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
