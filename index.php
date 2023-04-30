@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['superpower'] = !empty($_COOKIE['superpower_error']);
   $errors['limbs'] = !empty($_COOKIE['limbs_error']);
   $errors['text'] = !empty($_COOKIE['text_error']);
-  $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
+  $errors['check'] = !empty($_COOKIE['check_error']);
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
@@ -81,11 +81,11 @@ if ($errors['text']) {
   // Выводим сообщение.
   $messages[] = '<div class="error">Заполните text.</div>';
 }
-if ($errors['checkbox']) {
+if ($errors['check']) {
   // Удаляем куку, указывая время устаревания в прошлом.
-  setcookie('checkbox_error', '', 100000);
+  setcookie('check_error', '', 100000);
   // Выводим сообщение.
-  $messages[] = '<div class="error">Заполните checkbox.</div>';
+  $messages[] = '<div class="error">Заполните check.</div>';
 }
 
 
@@ -98,7 +98,7 @@ if ($errors['checkbox']) {
   $values['superpower'] = empty($_COOKIE['superpower_value']) ? '' : $_COOKIE['superpower_value'];
   $values['limbs'] = empty($_COOKIE['limbs_value']) ? '' : $_COOKIE['limbs_value'];
   $values['text'] = empty($_COOKIE['text_value']) ? '' : $_COOKIE['text_value'];
-  $values['checkbox'] = empty($_COOKIE['checkbox_value']) ? '' : $_COOKIE['checkbox_value'];
+  $values['check'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
   // TODO: аналогично все поля.
 
   // Включаем содержимое файла form.php.
@@ -167,14 +167,14 @@ else {
     // Сохраняем ранее введенное в форму значение на месяц.
     setcookie('text_value', $_POST['text'], time() + 30 * 24 * 60 * 60);
   }
-  if (empty($_POST['checkbox'])) {
-    setcookie('checkbox_error', '1', time() + 24 * 60 * 60);
+  if (empty($_POST['check'])) {
+    setcookie('check_error', '1', time() + 24 * 60 * 60);
     setcookie('check_value', '', 100000);
     $errors = TRUE;
   }
   else {
     // Сохраняем ранее введенное в форму значение на месяц.
-    setcookie('checkbox_value', $_POST['checkbox'], time() + 30 * 24 * 60 * 60);
+    setcookie('check_value', $_POST['checkbox'], time() + 30 * 24 * 60 * 60);
       setcookie('check_error','',100000);
   }
 
@@ -197,7 +197,7 @@ else {
     setcookie('superpower_error', '', 100000);
     setcookie('limbs_error', '', 100000);
     setcookie('text_error', '', 100000);
-    setcookie('checkbox_error', '', 100000);
+    setcookie('check_error', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
