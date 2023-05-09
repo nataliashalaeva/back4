@@ -4,7 +4,7 @@
  * с использованием Cookies, а также заполнение формы по умолчанию ранее
  * введенными значениями.
  */
-echo "<link rel='stylesheet' href='style.css'>";
+//echo "<link rel='stylesheet' href='style.css'>";
 // Отправляем браузеру правильную кодировку,
 // файл index.php должен быть в кодировке UTF-8 без BOM.
 header('Content-Type: text/html; charset=UTF-8');
